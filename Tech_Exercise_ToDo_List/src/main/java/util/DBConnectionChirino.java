@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import javax.servlet.ServletContext;
 
 public class DBConnectionChirino {
-   static Connection connection = null;
+   public static Connection connection = null;
    static ServletContext servletContext;
 
-   static void getDBConnection() {
+   protected static void getDBConnection() {
       System.out.println("-------- MySQL JDBC Connection Testing ------------");
       try {
          Class.forName("com.mysql.cj.jdbc.Driver");
