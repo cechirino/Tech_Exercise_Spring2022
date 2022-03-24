@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,26 +36,40 @@ public class PrintItems extends HttpServlet {
         // TODO Auto-generated constructor stub
         this.contextR = contextIn;
     }
+    
+
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			printlist(request, response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Prints the updated list of Item from the database;
 	 */
-	public void printlist(HttpServletResponse response) throws IOException 
+	public void printlist(HttpServletRequest request,HttpServletResponse response) throws IOException , SQLException, ServletException
 	{
 		Connection connection = null;
 		
 		DBConnectionChirino.getDBConnection(this.contextR);
         connection = DBConnectionChirino.connection;
         PrintWriter out = response.getWriter();
-        
+        List<String> listTodo = new ArrayList<String>();
         
 		
 		try 
@@ -65,24 +82,37 @@ public class PrintItems extends HttpServlet {
 			{
 	            
 	           String item = rs.getString("item").trim();
-
+	           listTodo.add(item);
 	           out.println("<div class=\"todo\">" +
-	        		   "<li class=\"todo-item\">" + item + "</li>" +
+	        		   "<li class=\"todo-item\">" + this.removeLastChar(item) + "</li>" +
 	        		   "<button class=\"delete-btn\"> <i class=\"fas fa-trash\"></i></button>"+
 	        		   
 	        		   "</div>");
-	               
+	            
+	          
 	         }
 			
-			
 			connection.close();
+			/*System.out.println("After");
+			request.setAttribute("listTodo", listTodo);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index_files/index.jsp");
+			dispatcher.forward(request, response);
+			System.out.println("before");*/
+			
 			
 		} catch (SQLException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+	
+	private String removeLastChar(String s)   
+	{  
+	//returns the string after removing the last character  
+	return s.substring(0, s.length() - 1);  
+	}   
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

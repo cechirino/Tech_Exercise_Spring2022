@@ -1,7 +1,9 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
 <%@ page import="maincontrol.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -44,12 +46,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		<div class="todo-container">
 			
 			<ul class="todo-list">
-				<%
-					PrintItems printDatabase = new PrintItems(getServletContext());
+			
+
+				<jsp:include page="index_files/itemlits.jsp"></jsp:include>
 				
-					printDatabase.printlist(response);
-					
-				%>
 				
 			</ul>
 			

@@ -58,7 +58,6 @@ public class RemoveItem extends HttpServlet {
 			{
 				PreparedStatement preparedStatement = connection.prepareStatement(removeSQL);
 				String itemPass = item + "%";
-				System.out.println(item);
 				preparedStatement.setString(1, itemPass);
 				preparedStatement.execute();
 			}
