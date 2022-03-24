@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="maincontrol.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +27,13 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 </head>
 <body>
 	
-	<div class = "container-fluid justify-content-md-center">
+	<div class = "container-fluid ">
 		
 		<div class="row justify-content-md-center">
 			<header class="d-flex justify-content-center">
 				<h1>Your To-Do List</h1>
 			</header>
-			<form action="" method="post" class="d-flex justify-content-center">
+			<form method="post" class="d-flex justify-content-center">
 				<input type="text" class="todo-input">
 				<button class="todo-button" type="submit"><i class="fas fa-plus-square"></i></button>
 				
@@ -38,7 +41,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		</div>
 	
 		
-		<div class="row justify-content-md-center todo-container">
+		<div class="todo-container">
 			
 			<ul class="todo-list">
 			
@@ -53,5 +56,8 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 	<!-- Bootstrap links -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
+	<!-- app scripts -->
+	<script src="./app.js"></script>
 </body>
 </html>
