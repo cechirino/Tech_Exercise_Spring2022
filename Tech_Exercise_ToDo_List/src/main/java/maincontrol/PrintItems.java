@@ -53,7 +53,7 @@ public class PrintItems extends HttpServlet {
 		
 		try 
 		{
-			String selectSQL = "SELECT * FROM MyTableChirino";
+			String selectSQL = "SELECT * FROM toDoListitems";
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
 			ResultSet rs = preparedStatement.executeQuery();
 			

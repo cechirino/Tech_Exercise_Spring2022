@@ -33,8 +33,8 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 			<header class="d-flex justify-content-center">
 				<h1>Your To-Do List</h1>
 			</header>
-			<form method="post" class="d-flex justify-content-center">
-				<input type="text" class="todo-input">
+			<form name="inputForm" class="d-flex justify-content-center">
+				<input type="text" name="itemIn" class="todo-input">
 				<button class="todo-button" type="submit"><i class="fas fa-plus-square"></i></button>
 				
 			</form>

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,14 +23,16 @@ import util.DBConnectionChirino;
 public class AddItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private ServletContext contextR;
 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddItem() {
+    public AddItem(ServletContext contextIn) {
         super();
         // TODO Auto-generated constructor stub
+        this.contextR = contextIn;
     }
 
 	/**
@@ -37,7 +40,6 @@ public class AddItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
 		
@@ -48,22 +50,22 @@ public class AddItem extends HttpServlet {
 	/**
 	 * Add a new item to the todo list
 	 */
-	public void additem(String item) 
+	public void addItem(String item) 
 	{
 		Connection connection = null;
 		
-		DBConnectionChirino.getDBConnection(getServletContext());
+		DBConnectionChirino.getDBConnection(this.contextR);
         connection = DBConnectionChirino.connection;
         
-        String insertSql = " INSERT INTO MyTableChirino0307 (id, item) values (default, ?)";
+        String insertSql = " INSERT INTO toDoListitems (id, item) values (default, ?)";
 		
 		try 
 		{
 			if(item != null) 
 			{
 				PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
-				item += "%";
-				preparedStatement.setString(1, item);
+				String itemPass = item + "%";
+				preparedStatement.setString(1, itemPass);
 				preparedStatement.execute();
 			}
 			

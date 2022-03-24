@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +20,16 @@ import util.DBConnectionChirino;
 @WebServlet("/RemoveItem")
 public class RemoveItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private ServletContext contextR;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveItem() {
+    public RemoveItem(ServletContext contextIn) {
         super();
         // TODO Auto-generated constructor stub
+        this.contextR = contextIn;
     }
 
 	/**
@@ -43,7 +47,7 @@ public class RemoveItem extends HttpServlet {
 	{
 		Connection connection = null;
 		
-		DBConnectionChirino.getDBConnection(getServletContext());
+		DBConnectionChirino.getDBConnection(this.contextR);
         connection = DBConnectionChirino.connection;
         
 		String removeSQL = "DELETE FROM toDoListitems WHERE item = ?";
@@ -53,8 +57,9 @@ public class RemoveItem extends HttpServlet {
 			if(item != null) 
 			{
 				PreparedStatement preparedStatement = connection.prepareStatement(removeSQL);
-				item += "%";
-				preparedStatement.setString(1, item);
+				String itemPass = item + "%";
+				System.out.println(item);
+				preparedStatement.setString(1, itemPass);
 				preparedStatement.execute();
 			}
 			
