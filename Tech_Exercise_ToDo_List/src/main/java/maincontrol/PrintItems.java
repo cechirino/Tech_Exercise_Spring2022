@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +22,16 @@ import util.DBConnectionChirino;
 @WebServlet("/PrintItems")
 public class PrintItems extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private ServletContext contextR;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrintItems() {
+    public PrintItems(ServletContext contextIn) {
         super();
         // TODO Auto-generated constructor stub
+        this.contextR = contextIn;
     }
 
 	/**
@@ -45,7 +49,7 @@ public class PrintItems extends HttpServlet {
 	{
 		Connection connection = null;
 		
-		DBConnectionChirino.getDBConnection(getServletContext());
+		DBConnectionChirino.getDBConnection(this.contextR);
         connection = DBConnectionChirino.connection;
         PrintWriter out = response.getWriter();
         
@@ -62,7 +66,11 @@ public class PrintItems extends HttpServlet {
 	            
 	           String item = rs.getString("item").trim();
 
-	           out.println("<li>" + item + "</li><br>");
+	           out.println("<div class=\"todo\">" +
+	        		   "<li class=\"todo-item\">" + item + "</li>" +
+	        		   "<button class=\"delete-btn\"> <i class=\"fas fa-trash\"></i></button>"+
+	        		   
+	        		   "</div>");
 	               
 	         }
 			

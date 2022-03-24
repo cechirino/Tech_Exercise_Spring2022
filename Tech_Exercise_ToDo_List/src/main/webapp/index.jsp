@@ -44,7 +44,13 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		<div class="todo-container">
 			
 			<ul class="todo-list">
-			
+				<%
+					PrintItems printDatabase = new PrintItems(getServletContext());
+				
+					printDatabase.printlist(response);
+					
+				%>
+				
 			</ul>
 			
 		</div>
