@@ -80,7 +80,7 @@ public class PrintItems extends HttpServlet {
 			
 			if(rs.next())
 			{
-				while (rs.next()) 
+				do 
 				{
 		            
 		           String item = rs.getString("item").trim();
@@ -92,7 +92,7 @@ public class PrintItems extends HttpServlet {
 		        		   "</div>");
 		            
 		          
-		         }
+		         }while (rs.next());
 			}
 			else 
 			{
