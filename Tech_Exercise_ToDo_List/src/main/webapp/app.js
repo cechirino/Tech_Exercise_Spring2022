@@ -33,9 +33,14 @@ function addTodo(event)
 		
 		
 		var http = new XMLHttpRequest();
-    	http.open("POST", "http://localhost:8080/Tech_Exercise_ToDo_List/addItem.jsp", true);
+		
+    	//http.open("POST", "http://localhost:8080/Tech_Exercise_ToDo_List/addItem.jsp", true); uncomment for localhost
+    	
+    	//Online server
+    	http.open("POST", "http://ec2-3-86-238-43.compute-1.amazonaws.com:8080/Tech_Exercise_ToDo_List/addItem.jsp", true);
+    	
     	http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    	var params = "itemIn=" + todoInput.value; // probably use document.getElementById(...).value
+    	var params = "itemIn=" + todoInput.value; 
     	http.send(params);
     	http.onload = function() 
 		{
@@ -61,9 +66,12 @@ function remove(e)
 		
 		todo.addEventListener("transitionend", function(){
 			var http = new XMLHttpRequest();
-	    	http.open("POST", "http://localhost:8080/Tech_Exercise_ToDo_List/removeitem.jsp", true);
+	    	//http.open("POST", "http://localhost:8080/Tech_Exercise_ToDo_List/removeitem.jsp", true); uncomment for localhost test
+	    	
+	    	//Online server
+	    	http.open("POST", "http://ec2-3-86-238-43.compute-1.amazonaws.com:8080/Tech_Exercise_ToDo_List/removeitem.jsp", true);
 	    	http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	    	var params = "itemToRemove=" + item.previousElementSibling.innerText; // probably use document.getElementById(...).value
+	    	var params = "itemToRemove=" + item.previousElementSibling.innerText; 
 	    	http.send(params);
 	    	http.onload = function() 
 			{

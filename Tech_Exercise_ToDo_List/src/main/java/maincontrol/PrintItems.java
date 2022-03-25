@@ -78,19 +78,31 @@ public class PrintItems extends HttpServlet {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
 			ResultSet rs = preparedStatement.executeQuery();
 			
-			while (rs.next()) 
+			if(rs.next())
 			{
-	            
-	           String item = rs.getString("item").trim();
-	           listTodo.add(item);
-	           out.println("<div class=\"todo\">" +
-	        		   "<li class=\"todo-item\">" + this.removeLastChar(item) + "</li>" +
-	        		   "<button class=\"delete-btn\"> <i class=\"fas fa-trash\"></i></button>"+
-	        		   
-	        		   "</div>");
-	            
-	          
-	         }
+				while (rs.next()) 
+				{
+		            
+		           String item = rs.getString("item").trim();
+		           listTodo.add(item);
+		           out.println("<div class=\"todo\">" +
+		        		   "<li class=\"todo-item\">" + this.removeLastChar(item) + "</li>" +
+		        		   "<button class=\"delete-btn\"> <i class=\"fas fa-trash\"></i></button>"+
+		        		   
+		        		   "</div>");
+		            
+		          
+		         }
+			}
+			else 
+			{
+				out.println("<div class=\"todo\">" +
+		        		   "<li class=\"todo-item\">" + "Remove me and add your task" + "</li>" +
+		        		   "<button class=\"delete-btn\"> <i class=\"fas fa-trash\"></i></button>"+
+		        		   
+		        		   "</div>");
+			}
+			
 			
 			connection.close();
 			/*System.out.println("After");

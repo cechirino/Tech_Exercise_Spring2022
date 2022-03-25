@@ -12,7 +12,7 @@ public class UtilPropChirino {
       String filePath = "/WEB-INF/config.properties";
       InputStream is = servletContext.getResourceAsStream(filePath);
 
-      System.out.println("[DBG] Loaded: " + new File(filePath).getAbsolutePath());
+      
       prop.load(is);
    }
 
